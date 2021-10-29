@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import './index.css';
-import state, { addPost, newPostText } from './store/store';
+import state from './store/store';
+import { addPost, newPostText, subscribe } from './store/store';
 //import reportWebVitals from './reportWebVitals';
 
 export const rerenderEntireTree = (state) => {
-  debugger;
   ReactDOM.render(
     <BrowserRouter>
       <App state={state} addPost={addPost} newPostText={newPostText}/>
@@ -18,6 +18,7 @@ export const rerenderEntireTree = (state) => {
 
 rerenderEntireTree(state); 
 
+subscribe(rerenderEntireTree);
 
 
 

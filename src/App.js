@@ -7,18 +7,19 @@ import { Route } from 'react-router';
 import Navbar from './component/Navbar/Navbar';
 
 const App = (props) => {
-  
+
   return (
     <div className='app-grid'>
       <Header />
       <Navbar />
       <div className='app-wrapper-content'>
 
-        <Route path='/profile' render={() => <Profile 
-        ProfileContent={props.state.ProfileContent} 
-        addPost={props.addPost} newPostText={props.newPostText}
+        <Route path='/profile' render={() => <Profile
+          ProfileContent={props.state.ProfileContent}
+          addPost={props.addPost}
+          newPostText={props.newPostText}
         />} />
-        <Route path='/dialogs' render={() => <Dialogs  />} />
+        <Route path='/dialogs' render={() => <Dialogs />} />
 
       </div>
     </div>

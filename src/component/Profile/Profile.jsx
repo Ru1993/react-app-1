@@ -14,7 +14,7 @@ const Profile = (props) => {
     }
 
     let newPost = () => {
-        let text = element.current.value;
+        let text = element.current.value
         props.newPostText(text);
     }
 
