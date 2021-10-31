@@ -1,51 +1,58 @@
-// const ADD_POST = 'ADD_POST';
-// const UPDETE_NEW_POST_TEXT = 'UPDETE_NEW_POST_TEXT';
+const ADD_POST = 'ADD_POST';
+const UPDETE_NEW_POST_TEXT = 'UPDETE_NEW_POST_TEXT';
 
-let rerenderEntireTree = () => {
-    console.log();
-}
-
-let state = {
-    ProfileContent: {
-        post: [
-            { id: 1, message: "Hello", like: 2 },
-            { id: 2, message: 'Cool', like: 4 }
-        ],
-        newProfile: ''
+let store = {
+    _collSubscribe() {
+        console.log();
     },
-    DialogsContent: {
-        dialog: [
-            { id: 1, name: 'Conor' },
-            { id: 2, name: 'Mari' }
-        ],
-        message: [
-            { id: 1, message: 'Hello' },
-            { id: 2, message: 'Ky' }
-        ],
-        newDialog: ''
-    }
+    _state: {
+        ProfileContent: {
+            post: [
+                { id: 1, message: "Hello", like: 2 },
+                { id: 2, message: 'Cool', like: 4 }
+            ],
+            newProfile: ''
+        },
+        DialogsContent: {
+            dialog: [
+                { id: 1, name: 'Conor' },
+                { id: 2, name: 'Mari' }
+            ],
+            message: [
+                { id: 1, message: 'Hello' },
+                { id: 2, message: 'Ky' }
+            ],
+            newDialog: ''
+        }
+    },
+
+    getState() {
+        return this._state;
+    },
+    subscribe(observer) {
+        this._collSubscribe = observer;
+    },
+
+    dispatch(action) {
+        if (action.type === ADD_POST) {
+            let newPost = {
+                id: 3,
+                message: this._state.ProfileContent.newProfile,
+                like: 0
+            };
+            this._state.ProfileContent.post.push(newPost);
+            //this._state.ProfileContent.newProfile = '';
+            this._collSubscribe(this._state);
+        } else if (action.type === UPDETE_NEW_POST_TEXT) {
+            this._state.ProfileContent.newProfile = action.newText;
+            this._collSubscribe(this._state);
+        }
+    },
 }
 
-export let addPost = () => {
-    let newPost = {
-        id: 3,
-        message: state.ProfileContent.newProfile,
-        like: 0
-    };
-    state.ProfileContent.post.push(newPost);
-    state.ProfileContent.newProfile = '';
-    rerenderEntireTree(state);
-}
+export const addPostActionCreator = ()=>({ type: ADD_POST })
+export const newPOstTextActionCreator = (text)=>({ type: UPDETE_NEW_POST_TEXT, newText: text })
 
-export let newPostText = (newText) => {
-    state.ProfileContent.newProfile = newText;
-    rerenderEntireTree(state);
-}
-
-export const subscribe = (observer) => {
-    rerenderEntireTree = observer;
-}
-
-//window.state = state;
-export default state;
+window.store = store;
+export default store;
 

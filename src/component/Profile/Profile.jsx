@@ -2,6 +2,7 @@ import React from "react";
 import stile from './Profile.module.css'
 import cars from './../../img/cars.jpg'
 import Post from './Post/Post';
+import { addPostActionCreator, newPOstTextActionCreator } from "../../store/store";
 
 const Profile = (props) => {
 
@@ -10,12 +11,12 @@ const Profile = (props) => {
     let element = React.createRef();
 
     let addPost = () => {
-        props.addPost();
+        props.dispatch(addPostActionCreator());
     }
 
     let newPost = () => {
         let text = element.current.value
-        props.newPostText(text);
+        props.dispatch(newPOstTextActionCreator(text));
     }
 
     return (
@@ -25,7 +26,7 @@ const Profile = (props) => {
             </div>
             <div>
                 <textarea onChange={newPost} ref={element}
-                    value={props.newText}/>
+                    value={props.newText} />
             </div>
             <div>
                 <button onClick={addPost}>Post</button>
