@@ -1,5 +1,6 @@
-const ADD_POST = 'ADD_POST';
-const UPDETE_NEW_POST_TEXT = 'UPDETE_NEW_POST_TEXT';
+import dialogsReducer from './dialogsReducer';
+import profileReducer from './profileReducer';
+import sidebarReducer from './sidebarReducer';
 
 let store = {
     _collSubscribe() {
@@ -23,7 +24,8 @@ let store = {
                 { id: 2, message: 'Ky' }
             ],
             newDialog: ''
-        }
+        },
+        Sidebar: {}
     },
 
     getState() {
@@ -34,24 +36,14 @@ let store = {
     },
 
     dispatch(action) {
-        if (action.type === ADD_POST) {
-            let newPost = {
-                id: 3,
-                message: this._state.ProfileContent.newProfile,
-                like: 0
-            };
-            this._state.ProfileContent.post.push(newPost);
-            //this._state.ProfileContent.newProfile = '';
-            this._collSubscribe(this._state);
-        } else if (action.type === UPDETE_NEW_POST_TEXT) {
-            this._state.ProfileContent.newProfile = action.newText;
-            this._collSubscribe(this._state);
-        }
+
+        this._state.ProfileContent = profileReducer(this._state.ProfileContent, action);
+        this._state.DialogsContent = dialogsReducer(this._state.DialogsContent, action);
+        this._state.Sidebar = sidebarReducer();
+
+        this._collSubscribe(this._state);
     },
 }
-
-export const addPostActionCreator = ()=>({ type: ADD_POST })
-export const newPOstTextActionCreator = (text)=>({ type: UPDETE_NEW_POST_TEXT, newText: text })
 
 window.store = store;
 export default store;
