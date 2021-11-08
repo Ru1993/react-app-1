@@ -2,7 +2,6 @@ import React from "react";
 import Dialog from './Dialog/Dialog';
 import Message from './Message/Message';
 import stile from './Dialogs.module.css'
-import { addMessageActionCreator, newMessageTextActionCreator } from '../../redux/dialogsReducer';
 
 
 const Dialogs = (props) => {
@@ -10,13 +9,13 @@ const Dialogs = (props) => {
     let dialogElement = props.DialogsContent.dialog.map((d) => <Dialog id={d.id} name={d.name} />);
     let messaegeElement = props.DialogsContent.message.map((m) => <Message id={m.id} message={m.message} />);
 
-    let addMessage = () => {
-        props.dispatch(addMessageActionCreator());
+    let OnAddMessage = () => {
+        props.addMessage();
     }
 
-    let newMessage = (event) => {
+    let OnNewMessage = (event) => {
         let text = event.target.value;
-        props.dispatch(newMessageTextActionCreator(text));
+        props.newMessage(text);
     }
 
     return (
@@ -29,11 +28,11 @@ const Dialogs = (props) => {
                     {messaegeElement}
                 </div>
                 <div>
-                    <textarea onChange={newMessage} 
-                        value={props.newText} />
+                    <textarea onChange={OnNewMessage} 
+                        value={props.newText} placeholder='Enter message' />
                 </div>
                 <div>
-                    <button onClick={addMessage} >clik</button>
+                    <button onClick={OnAddMessage} >clik</button>
                 </div>
             </div>
 
