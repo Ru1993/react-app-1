@@ -1,6 +1,6 @@
 import React from "react";
 import ava from './../../../img/ava.jpg'
-import stile from './Profile.module.css'
+import stile from './Post.module.css'
 
 const Post = (props) => {
     return (

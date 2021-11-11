@@ -3,8 +3,9 @@ import './App.css';
 import Header from './component/Header/Header';
 import { Route } from 'react-router';
 import Navbar from './component/Navbar/Navbar';
-import ProfileContainer from './component/Profile/ProfileContainer';
+import Profile from './component/Profile/Profile';
 import DialogsContainer from './component/Dialogs/DialogsContainer';
+import UsersContainer from './component/Users/UsersContainer';
 
 const App = (props) => {
 
@@ -14,12 +15,10 @@ const App = (props) => {
       <Navbar />
       <div className='app-wrapper-content'>
 
-        <Route path='/profile' render={() => <ProfileContainer
-          store={props.store}
-        />} />
-        <Route path='/dialogs' render={() => <DialogsContainer 
-        store={props.store}
-        />} />
+        <Route path='/profile' render={() => <Profile />} />
+        <Route path='/dialogs' render={() => <DialogsContainer />} />
+        <Route path='/users' render={() => <UsersContainer />} />
+
 
       </div>
     </div>

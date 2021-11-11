@@ -13,6 +13,9 @@ const Navbar = (props) => {
                 <NavLink to='/dialogs'activeClassName={stile.active}>Dialog</NavLink>
             </div>
             <div>
+                <NavLink to='/users'activeClassName={stile.active}>Users</NavLink>
+            </div>
+            <div>
                 Frends
             </div>
             <div>
