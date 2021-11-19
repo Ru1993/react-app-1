@@ -2,23 +2,6 @@ import { addPostActionCreator, newPostTextActionCreator } from "../../redux/prof
 import MyPost from './MyPost/MyPost';
 import { connect } from 'react-redux';
 
-// const ProfileContainer = (props) => {
-
-//     let state = props.store.getState().ProfileContent.post;
-
-//     let addPost = () => {
-//         props.store.dispatch(addPostActionCreator());
-//     }
-
-//     let newPost = (text) => {
-//         props.store.dispatch(newPostTextActionCreator(text));
-//     }
-
-//     return (
-//         <Profile newProfile={addPost} newPost={newPost}
-//             post={state} />
-//     );
-// }
 
 const mapStateToProps = (state) => {
     return {
@@ -40,3 +23,21 @@ const mapDispatchToProps = (dispatch)=>{
 const MyPostContainer = connect(mapStateToProps,mapDispatchToProps)(MyPost);
 
 export default MyPostContainer;
+
+// const ProfileContainer = (props) => {
+
+//     let state = props.store.getState().ProfileContent.post;
+
+//     let addPost = () => {
+//         props.store.dispatch(addPostActionCreator());
+//     }
+
+//     let newPost = (text) => {
+//         props.store.dispatch(newPostTextActionCreator(text));
+//     }
+
+//     return (
+//         <Profile newProfile={addPost} newPost={newPost}
+//             post={state} />
+//     );
+// }

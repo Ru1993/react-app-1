@@ -1,6 +1,5 @@
 import React from "react";
 import stile from './MyPost.module.css'
-import cars from './../../../img/cars.jpg'
 import Post from '../Post/Post';
 
 const MyPost = (props) => {
@@ -18,9 +17,6 @@ const MyPost = (props) => {
 
     return (
         <div className={stile.profile}>
-            <div>
-                <img src={cars} className={stile.img} />
-            </div>
             <div>
                 <textarea onChange={OnNewPost} 
                     value={props.newText} />

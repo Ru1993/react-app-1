@@ -1,6 +1,7 @@
 import React from "react";
 import stile from './User.module.css'
 import user from '../../../img/user.png'
+import { NavLink } from "react-router-dom";
 
 const User = (props) => {
 
@@ -18,8 +19,7 @@ const User = (props) => {
                     pages.map(p => {
                         return (<span
                             className={props.currentPage === p && stile.button}
-                            onClick={(event) => { props.onSetCurrentPage(p) }} >{p}
-                        </span>)
+                            onClick={(event) => { props.onSetCurrentPage(p) }} >{p}</span>)
                     })
                 }
             </div>
@@ -27,7 +27,9 @@ const User = (props) => {
                 props.users.map(u => <div kye={u.id}>
                     <span>
                         <div>
-                            <img src={u.photos.small != null ? u.photos.small : user} className={stile.img} />
+                            <NavLink to={'/profile/' + u.id}>
+                                <img src={u.photos.small != null ? u.photos.small : user} className={stile.img} />
+                            </NavLink>
                         </div>
                         <div>
                             {
