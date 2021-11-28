@@ -3,7 +3,6 @@ import Dialog from './Dialog/Dialog';
 import Message from './Message/Message';
 import stile from './Dialogs.module.css'
 
-
 const Dialogs = (props) => {
 
     let dialogElement = props.DialogsContent.dialog.map((d) => <Dialog id={d.id} name={d.name} />);

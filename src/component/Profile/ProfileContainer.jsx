@@ -1,8 +1,10 @@
 import React from "react";
-import { withRouter } from 'react-router-dom';
+import { withRouter} from 'react-router-dom';
 import { connect } from 'react-redux';
 import Profile from './Profile';
 import { profileUser } from './../../redux/profileReducer';
+import { withAuthRedirect } from "../hoc/withAuthRedirect";
+import { compose } from "redux";
 
 
 class ProfileContent extends React.Component {
@@ -31,6 +33,8 @@ const mapStateToProps = (state) => {
     }
 }
 
-let withRouterContainer = withRouter(ProfileContent)
-
-export default connect(mapStateToProps, { profileUser })(withRouterContainer);
+export default compose(
+    connect(mapStateToProps, { profileUser }),
+    withRouter,
+    withAuthRedirect
+)(ProfileContent);
