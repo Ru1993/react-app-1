@@ -16,22 +16,31 @@ export const usersAPI = {
             })
     },
     unfollow(id) {
-        return instance.delete(`follow/${id}`)
+        return instance.delete(`follow/${id}`);
 
     },
     follow(id) {
-        return instance.post(`follow/${id}`)
+        return instance.post(`follow/${id}`);
     },
-    prifile(userId){
-        return instance.get(`profile/` + userId)
-            .then(response => {
-                return response.data;
-            })
+    prifile(userId) {
+        return profileAPI.profile(userId);
     }
+}
+
+export const profileAPI = {
+    profile(userId) {
+        return instance.get(`profile/` + userId);
+    },
+    getStatus(userId) {
+        return instance.get(`profile/status/` + userId);
+    },
+    setStatus(status) {
+        return instance.put(`profile/status`, { status: status });
+    },
 }
 
 export const auth = {
     authMe() {
-        return instance.get(`auth/me`)
+        return instance.get(`auth/me`);
     }
 }
