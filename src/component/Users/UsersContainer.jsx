@@ -18,14 +18,14 @@ class UserContainer extends React.Component {
     render() {
 
         return (
-            <>
+            <div>
                 {this.props.isFetching ? <Preloader /> : null}
                 <User totalUsersCount={this.props.totalUsersCount} pageSize={this.props.pageSize}
                     currentPage={this.props.currentPage} onSetCurrentPage={this.onSetCurrentPage}
                     users={this.props.users} unfollow={this.props.unfollow} follow={this.props.follow}
                     followingInProgres={this.props.followingInProgres} 
                 />
-            </>
+            </div>
         )
     }
 }

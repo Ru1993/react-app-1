@@ -8,7 +8,10 @@ const Header = (props) => {
         <div className={stile.header}>
             <img src={heder} className={stile.photo} />
             <div className={stile.login}>
-                {props.isAuth ? props.login
+                {props.isAuth ? 
+                <div>
+                    {props.login} - <button onClick={props.logout} >Log out</button>
+                </div>
                     : <NavLink to='/login' >Login</NavLink>}
             </div>
         </div>
