@@ -3,8 +3,9 @@ import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { Element } from '../Common/FormsControls/FormsControls';
 import { required } from '../validators/validators';
-import { login } from './../../redux/authReducer';
+import { login } from '../../redux/authReducer';
 import { Redirect } from 'react-router';
+import stile from './../Common/FormsControls/FormsControls.module.css'
 
 let Input = Element ('input');
 
@@ -21,9 +22,11 @@ const LoginForm = (props) => {
                 validate={[required]}/>
             </div>
             <div>
-                <Field name={'rememberMe'} component={Input} type={'checkbox'} 
-                validate={[required]}/> remember me
+                <Field name={'rememberMe'} component={Input} type={'checkbox'} /> remember me
             </div>
+            { props.error && <div className={stile.fromSummeryError} >
+                {props.error}
+            </div>}
             <div>
                 <button>Login</button>
             </div>

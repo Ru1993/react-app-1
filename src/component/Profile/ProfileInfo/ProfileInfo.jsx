@@ -2,7 +2,7 @@ import React from "react";
 import stile from '../Profile.module.css'
 import cars from './../../../img/cars.jpg'
 import Preloader from './../../Common/Preloader/Preloader';
-import ProfileStatus from "./ProfileStatus";
+import ProfileStatusHooks from "./ProfileStatusHooks";
 
 const ProfileInfo = (props) => {
 
@@ -19,7 +19,7 @@ const ProfileInfo = (props) => {
                 <img src={props.profile.photos.large} />
             </div>
             <div>
-                <ProfileStatus status={props.status} setUpdateStatus={props.setUpdateStatus}/>
+                <ProfileStatusHooks status={props.status} setUpdateStatus={props.setUpdateStatus}/>
             </div>
         </div>
     )

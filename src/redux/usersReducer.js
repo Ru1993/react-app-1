@@ -69,17 +69,18 @@ export const setTotalUsersCount = (totalUsersCount) => ({ type: SET_TOTAL_USERS_
 export const setIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching });
 export const setFollowingInProgres = (isFetching, id) => ({ type: FOLLOWING_IN_PROGRES, isFetching, id });
 
-export const getUsers = (currentPage, pageSize) => {
-    return (dispatch) => {
-        dispatch(setIsFetching(true));
-        usersAPI.getUsers(currentPage, pageSize)
-            .then(response => {
-                dispatch(setIsFetching(false));
-                dispatch(setUsers(response.items));
-                dispatch(setTotalUsersCount(response.totalCount));
-            })
-    }
+export const requestUsers = (currentPage, pageSize) => (dispatch) => {
+    dispatch(setIsFetching(true));
+    dispatch(setCurrentPage(currentPage));
+
+    usersAPI.getUsers(currentPage, pageSize)
+        .then(response => {
+            dispatch(setIsFetching(false));
+            dispatch(setUsers(response.items));
+            dispatch(setTotalUsersCount(response.totalCount));
+        })
 }
+
 
 export const follow = (userId) => {
     return (dispatch) => {
