@@ -7,11 +7,11 @@ import UsersContainer from './component/Users/UsersContainer';
 import ProfileContainer from './component/Profile/ProfileContainer';
 import HeaderContent from './component/Header/HeaderContainer';
 import Login from './component/Login/Login';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import { compose } from 'redux';
+import { connect, Provider } from 'react-redux';
 import Preloader from './component/Common/Preloader/Preloader';
 import {initialasetApp} from './redux/appReducer';
+import { BrowserRouter } from 'react-router-dom/cjs/react-router-dom.min';
+import store from './redux/reduxStore';
 
 class App extends React.Component {
 
@@ -46,4 +46,16 @@ let mapStateToProps = (state) => ({
   initialaset: state.app.initialaset
 })
 
-export default  connect(mapStateToProps, { initialasetApp })(App);
+let ContainerApp = connect(mapStateToProps, { initialasetApp })(App);
+
+let AppComponent = (props) =>{
+  return (
+    <BrowserRouter>
+      <Provider store={store}>
+        <ContainerApp />
+      </Provider>
+    </BrowserRouter>
+  )
+}
+
+export default AppComponent;

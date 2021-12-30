@@ -5,26 +5,6 @@ import { Field, reduxForm } from "redux-form";
 import { maxLenghtCreator, required } from "../../validators/validators";
 import { Element } from './../../Common/FormsControls/FormsControls';
 
-const MyPost = (props) => {
-
-    let postElement = props.ProfileContent.post.map((p) => <Post id={p.id} message={p.message} like={p.like} />)
-
-    let newPost = (value) =>{
-        props.newProfile(value.newPostText);
-    }
-
-    return (
-        <div className={stile.profile}>
-            <div>
-                <FormReduxMyPost onSubmit={newPost} />
-            </div>
-            <div>
-                {postElement}
-            </div>
-        </div>
-    );
-}
-
 let Textarea = Element('textarea');
 let maxLength10 = maxLenghtCreator(10);
 
@@ -43,5 +23,25 @@ const FormMyPost = (props) =>{
 }
 
 const FormReduxMyPost = reduxForm({form:'newPost'})(FormMyPost);
+
+const MyPost = (props) => {
+    console.log('Render');
+    let postElement = props.ProfileContent.post.map((p) => <Post id={p.id} message={p.message} like={p.like} />)
+
+    let newPost = (value) =>{
+        props.newProfile(value.newPostText);
+    }
+
+    return (
+        <div className={stile.profile}>
+            <div>
+                <FormReduxMyPost onSubmit={newPost} />
+            </div>
+            <div>
+                {postElement}
+            </div>
+        </div>
+    );
+}
 
 export default MyPost;
