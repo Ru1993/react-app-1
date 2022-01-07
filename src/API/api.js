@@ -17,12 +17,11 @@ export const usersAPI = {
     },
     unfollow(id) {
         return instance.delete(`follow/${id}`);
-
     },
     follow(id) {
         return instance.post(`follow/${id}`);
     },
-    prifile(userId) {
+    profile(userId) {
         return profileAPI.profile(userId);
     }
 }
@@ -37,16 +36,30 @@ export const profileAPI = {
     setStatus(status) {
         return instance.put(`profile/status`, { status: status });
     },
+    savePhoto(photoFiles) {
+        let formData = new FormData();
+        formData.append('image', photoFiles)
+        return instance.put(`profile/photo`, formData);
+    },
+    saveFormData(profile) {
+        return instance.put(`profile`, profile);
+    }
 }
 
 export const auth = {
     authMe() {
         return instance.get(`auth/me`);
     },
-    login(email, password, rememberMe = false) {
-        return instance.post(`auth/login`, { email, password, rememberMe });
+    login(email, password, rememberMe = false, captcha) {
+        return instance.post(`auth/login`, { email, password, rememberMe, captcha });
     },
     logout() {
         return instance.delete(`auth/login`);
+    }
+}
+
+export const securityAPI = {
+    getSecurityURL(){
+        return instance.get(`security/get-captcha-url`);
     }
 }

@@ -1,6 +1,6 @@
 .pageNumber.selectedPage{
     color:gold;
-    border-color: black;
+    border-color: gold;
 }
 
 .paginator{
@@ -8,7 +8,7 @@
 }
 
 .pageNumber{
-    padding: 2px;
-    border: 1px solid gray;
+    padding: 4px;
+    border: 4px solid gray;
 }
 

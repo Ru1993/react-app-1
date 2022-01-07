@@ -25,8 +25,7 @@ const FormMyPost = (props) =>{
 const FormReduxMyPost = reduxForm({form:'newPost'})(FormMyPost);
 
 const MyPost = (props) => {
-    console.log('Render');
-    let postElement = props.ProfileContent.post.map((p) => <Post id={p.id} message={p.message} like={p.like} />)
+    let postElement = props.ProfileContent.post.map((p) => <Post key={p.id} message={p.message} like={p.like} />)
 
     let newPost = (value) =>{
         props.newProfile(value.newPostText);

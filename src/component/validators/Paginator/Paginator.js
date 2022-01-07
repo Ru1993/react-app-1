@@ -11,11 +11,9 @@ const Paginator = ({ portinSize = 10, ...props }) => {
     }
 
     let portionCount = Math.ceil(pageCount / portinSize);
-    let [portionNumber, setPortionNumber] = useState(1)
+    let [portionNumber, setPortionNumber] = useState(1);
     let leftPortionPageNumber = (portionNumber - 1) * portinSize + 1;
     let rightPortionPageNumber = portionNumber * portinSize;
-
-    
 
     return (
         <div className={styles.paginator}>
@@ -25,9 +23,9 @@ const Paginator = ({ portinSize = 10, ...props }) => {
                 .filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
                 .map((p) => {
                     return <span className={`${props.currentPage === p ?
-                        styles.selectedPage : styles.pageNumber}`}
+                        styles.selectedPage : styles.pageNumber}`} 
                         key={p}
-                        onClick={(event) => {props.onSetCurrentPage(p)}}>{p}</span>
+                        onClick={(event)=>{props.onSetCurrentPage(p)}}>{p}</span>
                 })}
             {portionCount > portionNumber &&
                 <button onClick={() => { setPortionNumber(portionNumber + 1) }}>NEXT</button>}
@@ -36,3 +34,5 @@ const Paginator = ({ portinSize = 10, ...props }) => {
 }
 
 export default Paginator;
+
+
