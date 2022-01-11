@@ -25,3 +25,5 @@ const Content = ({ contactsTitle, contactsValue }) => {
 }
 
 export default ProfileData;
+
+

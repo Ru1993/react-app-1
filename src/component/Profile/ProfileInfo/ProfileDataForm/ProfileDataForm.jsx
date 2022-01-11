@@ -15,16 +15,19 @@ const ProfileDataForm = ({ handleSubmit, profile, error }) => {
                 {error}
             </div>}
             <div>
-                <b>fullName :</b> <Field placeholder={'Full Name'} name={'fullName'} component={Input}
+                <b>fullName :</b> <Field placeholder={'Full Name'} name={'fullName'} 
+                component={Input}
                     validate={[required]} />
             </div>
             <div>
-                <b>lookingForAJob :</b> <Field name={'lookingForAJob'} component={Input} type={'checkbox'} />
+                <b>lookingForAJob :</b> <Field name={'lookingForAJob'} 
+                component={Input} type={'checkbox'} />
             </div>
             <div>
                 <b>Contacts :</b>{Object.keys(profile.contacts).map(key => {
                     return <div key={key} className={stile.contacts}>
-                        <b>{key} : <Field key={key} name={`contacts.${key}`} component={Input} /></b>
+                        <b>{key} : <Field key={key} name={`contacts.${key}`} 
+                        component={Input} /></b>
                     </div>
                 })}
             </div>
@@ -35,3 +38,4 @@ const ProfileDataForm = ({ handleSubmit, profile, error }) => {
 const ProfileDataReduxForm = reduxForm({ form: 'editProfile' })(ProfileDataForm);
 
 export default ProfileDataReduxForm;
+

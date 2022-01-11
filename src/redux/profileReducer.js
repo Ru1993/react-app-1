@@ -32,7 +32,7 @@ const profileReducer = (state = initialState, action) => {
         case DELETE_POST:
             return { ...state, post: state.post.filter(p => p.id != action.postId) }
         case SET_SAVE_PHOTO:
-            return { ...state, profile: {...state.profile, photos: action.photos} }
+            return { ...state, profile: { ...state.profile, photos: action.photos } }
         default:
             return state;
     }
@@ -50,7 +50,6 @@ export const profileUser = (userId) => async (dispatch) => {
 
     dispatch(setUsersProfile(response.data));
 }
-
 
 export const getStatusProfile = (userId) => async (dispatch) => {
     let response = await profileAPI.getStatus(userId);

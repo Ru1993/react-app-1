@@ -3,14 +3,14 @@ import stile from '../Profile.module.css'
 import ava from '../../../img/user.png'
 import Preloader from './../../Common/Preloader/Preloader';
 import ProfileStatusHooks from "./ProfileStatusHooks";
-import ProfileDataForm from "./ProfileDataForm/ProfileDataForm";
-import ProfileData from "./ProfileDataForm/ProfileData";
+import ProfileDataReduxForm from "./ProfileDataForm/ProfileDataForm";
+import ProfileData from './ProfileDataForm/ProfileData';
 
-const ProfileInfo = ({ error, ...props }) => {
+const ProfileInfo = ({ profile, error, ...props }) => {
 
-    let [editMode, setEditMode] = useState(false);
+    const [editMode, setEditMode] = useState(false);
 
-    if (!props.profile) {
+    if (!profile) {
         return (<Preloader />)
     }
 
@@ -20,22 +20,21 @@ const ProfileInfo = ({ error, ...props }) => {
         }
     }
 
-    const onSubmit = (FormData) => {
-        props.saveFormData(FormData)
+    const onSubmit = (formData) => {
+        props.saveFormData(formData)
             .then(() => {
                 setEditMode(false);
             })
     }
 
     return (
-        <div className={stile.ststus}>
+        <div className={stile.status}>
             <div>
-                <img src={props.profile.photos.large || ava} className={stile.photo} />
+                <img src={profile.photos.large || ava} className={stile.photo} />
                 {props.isOwner && <input type={'file'} onChange={onSavePhotos} />}
-            </div>
-            {editMode ?
-                <ProfileDataForm initialValues={props.profile} profile={props.profile} onSubmit={onSubmit} />
-                : <ProfileData profile={props.profile} goToEditMode={() => { setEditMode(true) }} isOwner={props.isOwner} />}
+            </div>{editMode
+                ? <ProfileDataReduxForm initialValues={profile} profile={profile} onSubmit={onSubmit} />
+                : <ProfileData isOwner={props.isOwner} goToEditMode={() => { setEditMode(true) }} profile={profile} />}
             <div>
                 <ProfileStatusHooks status={props.status} setUpdateStatus={props.setUpdateStatus} />
             </div>
@@ -44,3 +43,10 @@ const ProfileInfo = ({ error, ...props }) => {
 }
 
 export default ProfileInfo;
+
+
+
+
+
+
+

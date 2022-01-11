@@ -8,8 +8,8 @@ import { Element } from "../Common/FormsControls/FormsControls";
 
 const Dialogs = (props) => {
 
-    let dialogElement = props.DialogsContent.dialog.map((d) => <Dialog id={d.id} name={d.name} />);
-    let messaegeElement = props.DialogsContent.message.map((m) => <Message id={m.id} message={m.message} />);
+    let dialogElement = props.DialogsContent.dialog.map((d) => <Dialog key={d.id} id={d.id} name={d.name} />);
+    let messaegeElement = props.DialogsContent.message.map((m) => <Message key={m.id} id={m.id} message={m.message} />);
 
     let addNewMessage = (value) => {
         props.addMessage(value.newMessage);

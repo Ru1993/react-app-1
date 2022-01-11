@@ -1,20 +1,18 @@
 import React from 'react';
 import './App.css';
-import { Route } from 'react-router';
 import Navbar from './component/Navbar/Navbar';
-//import DialogsContainer from './component/Dialogs/DialogsContainer';
 import UsersContainer from './component/Users/UsersContainer';
 import ProfileContainer from './component/Profile/ProfileContainer';
 import HeaderContent from './component/Header/HeaderContainer';
-import Login from './component/Login/Login';
 import { connect, Provider } from 'react-redux';
 import Preloader from './component/Common/Preloader/Preloader';
-import {initialasetApp} from './redux/appReducer';
-import { BrowserRouter } from 'react-router-dom/cjs/react-router-dom.min';
+import { initialasetApp } from './redux/appReducer';
 import store from './redux/reduxStore';
 import { withSuspense } from './component/hoc/withSuspense';
+import { Switch, Route, BrowserRouter, Redirect } from 'react-router-dom';
 
 const DialogsContainer = React.lazy(() => import('./component/Dialogs/DialogsContainer'));
+const Login = React.lazy(() => import('./component/Login/Login'));
 
 class App extends React.Component {
 
@@ -24,7 +22,7 @@ class App extends React.Component {
 
   render() {
 
-    if (!this.props.initialaset) {
+    if (!this.props.initialized) {
       return <Preloader />
     }
 
@@ -33,12 +31,21 @@ class App extends React.Component {
         <HeaderContent />
         <Navbar />
         <div className='app-wrapper-content'>
+          <Switch>
 
-          <Route path='/profile/:userId?' render={() => <ProfileContainer />} />
-          <Route path='/dialogs' render={ withSuspense(DialogsContainer) } />
-          <Route path='/users' render={() => <UsersContainer />} />
-          <Route path='/login' render={() => <Login />} />
+            <Route path='/profile/:userId?' render={() => <ProfileContainer />} />
 
+            <Route path='/dialogs' render={withSuspense(DialogsContainer)} />
+
+            <Route path='/users' render={() => <UsersContainer />} />
+
+            <Route path='/login' render={withSuspense(Login)} />
+
+            <Redirect from="/" to="/profile" />
+
+            <Route path='*' render={()=><div>404 NOT FOUND</div>}/>
+
+          </Switch>
         </div>
       </div>
     );
@@ -46,14 +53,14 @@ class App extends React.Component {
 }
 
 let mapStateToProps = (state) => ({
-  initialaset: state.app.initialaset
+  initialized: state.app.initialized
 })
 
 let ContainerApp = connect(mapStateToProps, { initialasetApp })(App);
 
-let AppComponent = (props) =>{
+let AppComponent = (props) => {
   return (
-    <BrowserRouter>
+    <BrowserRouter >
       <Provider store={store}>
         <ContainerApp />
       </Provider>
