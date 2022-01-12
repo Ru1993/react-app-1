@@ -12,7 +12,7 @@ class ProfileContent extends React.Component {
     refreshProfile(){
         let userId = this.props.match.params.userId
         if (!userId) {
-            userId = this.props.autorizeUserId;
+            userId = this.props.authorizesUserId;
             if (!userId) {
                 this.props.history.push('/login')
             }
@@ -49,7 +49,7 @@ const mapStateToProps = (state) => {
         profile: state.ProfileContent.profile,
         status: state.ProfileContent.status,
         isAuth: state.auth.isAuth,
-        autorizeUserId: state.auth.id
+        authorizesUserId: state.auth.id
     }
 }
 
