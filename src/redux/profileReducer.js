@@ -52,16 +52,22 @@ export const profileUser = (userId) => async (dispatch) => {
 }
 
 export const getStatusProfile = (userId) => async (dispatch) => {
+
     let response = await profileAPI.getStatus(userId);
 
     dispatch(setStatus(response.data));
+
 }
 
 export const setUpdateStatus = (status) => async (dispatch) => {
-    let response = await profileAPI.setStatus(status);
+    try {
+        let response = await profileAPI.setStatus(status);
 
-    if (response.data.resultCode === 0) {
-        dispatch(setStatus(status));
+        if (response.data.resultCode === 0) {
+            dispatch(setStatus(status));
+        }
+    } catch (error) {
+        console.log(error)
     }
 }
 
@@ -78,7 +84,7 @@ export const saveFormData = (profile) => async (dispatch, getState) => {
     let response = await profileAPI.saveFormData(profile);
     if (response.data.resultCode === 0) {
         dispatch(profileUser(userId));
-    } else{
+    } else {
         dispatch(stopSubmit('editProfile', { _error: response.data.messages[0] }));
         return Promise.reject(response.data.messages[0]);
     }

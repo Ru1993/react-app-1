@@ -13,9 +13,9 @@ class ProfileContent extends React.Component {
         let userId = this.props.match.params.userId
         if (!userId) {
             userId = this.props.authorizesUserId;
-            if (!userId) {
-                this.props.history.push('/login')
-            }
+            // if (!userId) {
+            //     this.props.history.push('/login')
+            // }
         }
         this.props.profileUser(userId);
         this.props.getStatusProfile(userId);
